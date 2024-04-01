@@ -25,26 +25,6 @@ function HeaderSearch() {
   };
 
   const navigate = useNavigate();
-  //submit handler
-  // const submit = useSubmit();
-  // const goToSearch = (event) => {
-  //   submit(
-  //     {
-  //       city: valueCity,
-  //       dateStart: dateStartInput,
-  //       dateEnd: dateEndInput,
-  //       maxPeople: valueMaxPeople,
-  //     },
-  //     { method: "POST", action: "/home" }
-  //   );
-  //   // navigate("/search");
-  //   // event.preventDefault();
-  //   // const city = event.target[0].value;
-  //   // const dateStart = event.target[1].value;
-  //   // const dateEnd = event.target[2].value;
-  //   // const maxPeople = event.target[3].value;
-  //   // console.log(event.target[1].value);
-  // };
 
   const [dateInput, setDateInput] = useState("");
   const [isPicker, setIsPicker] = useState(false);
@@ -131,7 +111,7 @@ function HeaderSearch() {
         </label>
         <input
           className="header-search__input header-search__inputWhere"
-          placeholder="1 preson - 1 room"
+          placeholder="1 person - 1 room"
           type="text"
           name="peopleRoom"
           value={valuePeopleRoom}
@@ -140,11 +120,9 @@ function HeaderSearch() {
       </div>
 
       <Link
-        to={`/search?city=${valueCity}&date=${dateStartInput}&dateEnd=${dateEndInput}&maxPeople=${
-          valuePeopleRoom.split("-")[0] ? valuePeopleRoom.split("-")[0] : ""
-        }&room=${
-          valuePeopleRoom.split("-")[1] ? valuePeopleRoom.split("-")[1] : 1
-        }`}
+        to={`/search?city=${valueCity}&date=${dateStartInput}&dateEnd=${dateEndInput}&maxPeople=${valuePeopleRoom.split("-")[0] ? valuePeopleRoom.split("-")[0] : ""
+          }&room=${valuePeopleRoom.split("-")[1] ? valuePeopleRoom.split("-")[1] : 1
+          }`}
         className="header-search__btn"
       >
         Search
