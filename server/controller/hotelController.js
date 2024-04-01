@@ -2,12 +2,17 @@ const { Error } = require("./error");
 const Hotel = require("../models/hotel");
 const Room = require("../models/room");
 const Transaction = require("../models/transaction");
-const asyncHandler = require('express-async-handler');
 //get hotel as home
-exports.getHotels = asyncHandler(async (req, res, next) => {
-  const hotels = await Hotel.find().exec();
-  res.json(hotels);
-});
+exports.getHotels = (req, res, next) => {
+  Hotel.find()
+    .exec()
+    .then((results) => {
+      res.json(results);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 //get detail hotel
 exports.getDetail = (req, res, next) => {

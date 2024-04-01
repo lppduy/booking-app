@@ -15,26 +15,28 @@ export default Detail;
 export async function loader({ request, params }) {
   const searchParams = new URL(request.url).searchParams;
   const id = searchParams.get("id");
-  const userId = getAuthUser() ? getAuthUser()._id : "";
-  const response = await fetch(`http://localhost:5000/hotels/detail?id=${id}`, {
+  const accessToken = localStorage.getItem("accessToken");
+  const response = await fetch(`http://localhost:8080/hotels/detail?id=${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: userId,
+      Authorization: accessToken,
     },
   });
+
   if (!response.ok) {
     throw json({ message: "error loading detail" }, { status: 404 });
   }
   const dataHotel = await response.json();
+  console.log("dataHotel", dataHotel)
 
   const rooms = { rooms: dataHotel.rooms };
 
-  const responseRooms = await fetch("http://localhost:5000/rooms", {
+  const responseRooms = await fetch("http://localhost:8080/rooms", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: userId,
+      Authorization: accessToken,
     },
     body: JSON.stringify(rooms),
   });
@@ -44,12 +46,12 @@ export async function loader({ request, params }) {
   const dataRooms = await responseRooms.json();
 
   const responseTransactions = await fetch(
-    `http://localhost:5000/transactions/${id}`,
+    `http://localhost:8080/transactions/${id}`,
     {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: userId,
+        Authorization: accessToken,
       },
     }
   );

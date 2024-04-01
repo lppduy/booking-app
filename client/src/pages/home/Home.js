@@ -15,15 +15,13 @@ const Home = () => {
 export default Home;
 
 export async function loader() {
-  const userId = getAuthUser() ? getAuthUser()._id : "";
-  console.log('userId', userId);
+
   const response = await fetch("http://localhost:8080/hotels/listHotel", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
       Authorization: localStorage.getItem("accessToken"),
     },
-    body: null,
   });
 
 
@@ -36,5 +34,6 @@ export async function loader() {
   }
 
   const data = await response.json();
+  console.log(">>>>>>>", data)
   return data;
 }

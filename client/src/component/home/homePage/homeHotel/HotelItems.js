@@ -3,7 +3,7 @@ import "./HotelItems.css";
 import { Link } from "react-router-dom";
 function HotelItems(props) {
   const hotelItem = props.hotelData;
-
+  console.log('hotelItem', hotelItem)
   return (
     <div className="hotel">
       {hotelItem.map((item) => {

@@ -14,38 +14,6 @@ const Search = () => {
 };
 
 export default Search;
-// export async function loader({ request }) {
-//   const userId = getAuthUser() ? getAuthUser()._id : "";
-//   const searchParams = new URL(request.url).searchParams;
-//   const dataSearch = {
-//     city: searchParams.get("city"),
-//     dateStart: searchParams.get("dateStart"),
-//     dateEnd: searchParams.get("dateEnd"),
-//     maxPeople: searchParams.get("maxPeople"),
-//     room: searchParams.get("room"),
-//   };
-//   console.log(userId);
-//   const response = await fetch(
-//     `http://localhost:5000/hotels/search?city=${dataSearch.city}&dateStart=${dataSearch.dateStart}&dateEnd=${dataSearch.dateEnd}&room=${dataSearch.room}&maxPeople=${dataSearch.maxPeople}`,
-//     {
-//       method: "GET",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: userId,
-//       },
-//       body: null,
-//     }
-//   );
-//   if (response.status === 401) {
-//     alert("Please Login");
-//     return redirect("/auth?mode=login");
-//   }
-//   if (!response.ok) {
-//     throw json({ message: "fetch failed" }, { status: 500 });
-//   }
-//   const data = await response.json();
-//   return data;
-// }
 
 export async function loader({ request }) {
   const searchParams = new URL(request.url).searchParams;
@@ -56,17 +24,16 @@ export async function loader({ request }) {
     maxPeople: searchParams.get("maxPeople"),
     room: searchParams.get("room"),
   };
-  const userId = getAuthUser() ? getAuthUser()._id : "";
-  console.log(userId);
+  const accessToken = localStorage.getItem("accessToken");
+  console.log(accessToken);
   const response = await fetch(
-    `http://localhost:5000/hotels/search?city=${dataSearch.city}&dateStart=${dataSearch.dateStart}&dateEnd=${dataSearch.dateEnd}&room=${dataSearch.room}&maxPeople=${dataSearch.maxPeople}`,
+    `http://localhost:8080/hotels/search?city=${dataSearch.city}&dateStart=${dataSearch.dateStart}&dateEnd=${dataSearch.dateEnd}&room=${dataSearch.room}&maxPeople=${dataSearch.maxPeople}`,
     {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: userId,
+        Authorization: accessToken,
       },
-      body: null,
     }
   );
   if (response.status === 401) {
@@ -78,6 +45,6 @@ export async function loader({ request }) {
   }
 
   const data = await response.json();
-  console.log(data);
+  console.log('data', data);
   return data;
 }

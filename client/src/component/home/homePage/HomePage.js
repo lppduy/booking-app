@@ -9,6 +9,7 @@ import "./HomePage.css";
 import { useLoaderData } from "react-router";
 function HomePage() {
   const dataHotels = useLoaderData();
+  console.log("dataHotels", dataHotels)
 
   // city hotels
   const quantityHotelHN = dataHotels.filter((h) => h.city === "Ha Noi").length;
