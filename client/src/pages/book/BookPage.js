@@ -1,6 +1,6 @@
 import { json, redirect } from "react-router";
 import BookHotel from "../../component/book/BookHotel";
-import { getAuthUserId } from "../../util/token";
+import { getAuthUser } from "../../util/token";
 
 function BookPage() {
   return <BookHotel />;
@@ -9,10 +9,10 @@ function BookPage() {
 export default BookPage;
 export async function action({ request }) {
   const data = await request.formData();
-  const userId = getAuthUserId() ? getAuthUserId()._id : "";
+  const userId = getAuthUser() ? getAuthUser()._id : "";
 
   const dataBook = {
-    user: { userName: getAuthUserId().userName, userId: userId },
+    user: { username: getAuthUser().username, userId: userId },
     hotel: JSON.parse(data.get("hotel")),
     rooms: JSON.parse(data.get("rooms")),
     dateStart: data.get("dateStart"),

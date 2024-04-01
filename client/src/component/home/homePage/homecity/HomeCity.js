@@ -1,21 +1,21 @@
 import React from "react";
 import "./HomeCity.css";
 import CityItems from "./CityItems";
-function HomeCity({ quatityHotel }) {
+function HomeCity({ quantityHotel }) {
   const cityHotels = [
     {
       name: "Da Nang",
-      properties: quatityHotel.quatityHotelDN,
+      properties: quantityHotel.quantityHotelDN,
       img: "./images/city Image/Da Nang.jpg",
     },
     {
       name: "Ha Noi",
-      properties: quatityHotel.quatityHotelHN,
+      properties: quantityHotel.quantityHotelHN,
       img: "./images/city Image/Ha Noi.jpg",
     },
     {
       name: "Ho Chi Minh",
-      properties: quatityHotel.quatityHotelHCM,
+      properties: quantityHotel.quantityHotelHCM,
       img: "./images/city Image/HCM.jpg",
     },
   ];

@@ -42,9 +42,11 @@ export async function action({ request }) {
     return redirect("/auth?mode=login");
   } else if (mode === "login") {
     localStorage.setItem("accessToken", dataResult.accessToken);
+    localStorage.setItem("user", JSON.stringify(dataResult.user));
     return redirect("/");
   } else {
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("user");
     return redirect("/auth?mode=login");
   }
 }

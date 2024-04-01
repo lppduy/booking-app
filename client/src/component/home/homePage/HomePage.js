@@ -11,15 +11,15 @@ function HomePage() {
   const dataHotels = useLoaderData();
 
   // city hotels
-  const quatityHotelHN = dataHotels.filter((h) => h.city === "Ha Noi").length;
-  const quatityHotelHCM = dataHotels.filter(
-    (h) => h.city == "Ho Chi Minh"
+  const quantityHotelHN = dataHotels.filter((h) => h.city === "Ha Noi").length;
+  const quantityHotelHCM = dataHotels.filter(
+    (h) => h.city === "Ho Chi Minh"
   ).length;
-  const quatityHotelDN = dataHotels.filter((h) => h.city == "Da Nang").length;
-  const quatityHotel = {
-    quatityHotelHN,
-    quatityHotelHCM,
-    quatityHotelDN,
+  const quantityHotelDN = dataHotels.filter((h) => h.city === "Da Nang").length;
+  const quantityHotel = {
+    quantityHotelHN,
+    quantityHotelHCM,
+    quantityHotelDN,
   };
 
   // top rating
@@ -29,7 +29,7 @@ function HomePage() {
     .splice(0, 3);
   return (
     <div className="home-page">
-      <HomeCity quatityHotel={quatityHotel} />
+      <HomeCity quantityHotel={quantityHotel} />
       <HomeType dataHotels={dataHotels} />
       <HomeHotel topRating={topRating} />
       <Form />

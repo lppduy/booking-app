@@ -1,14 +1,15 @@
 import React from "react";
 import "./NavBarHeader.css";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { getAuthUserId } from "../../util/token";
+import { getAuthUser } from "../../util/token";
 function NavBarHeader() {
-  const user = getAuthUserId();
+  const user = getAuthUser();
   console.log(user);
   const navigate = useNavigate();
   //click logout
   const clickLogoutHandler = () => {
-    localStorage.removeItem("userId");
+    localStorage.removeItem("user");
+    localStorage.removeItem("accessToken");
     navigate("/auth?mode=login");
   };
 
@@ -25,7 +26,7 @@ function NavBarHeader() {
         )}
         {user && (
           <>
-            <p>{user.userName}</p>
+            <p>{user.username}</p>
             <NavLink to="/transaction">Transaction</NavLink>
           </>
         )}

@@ -1,7 +1,7 @@
 import Form from "../../component/home/homePage/form/Form";
 import DetailPage from "../../component/detail/DetailPage";
 import { json } from "react-router";
-import { getAuthUserId } from "../../util/token";
+import { getAuthUser } from "../../util/token";
 const Detail = () => {
   return (
     <div>
@@ -15,7 +15,7 @@ export default Detail;
 export async function loader({ request, params }) {
   const searchParams = new URL(request.url).searchParams;
   const id = searchParams.get("id");
-  const userId = getAuthUserId() ? getAuthUserId()._id : "";
+  const userId = getAuthUser() ? getAuthUser()._id : "";
   const response = await fetch(`http://localhost:5000/hotels/detail?id=${id}`, {
     method: "GET",
     headers: {

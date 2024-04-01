@@ -1,7 +1,7 @@
 import SearchPage from "../../component/search/SearchPage";
 
 import Form from "../../component/home/homePage/form/Form";
-import { getAuthUserId } from "../../util/token";
+import { getAuthUser } from "../../util/token";
 import { json, redirect } from "react-router";
 
 const Search = () => {
@@ -15,7 +15,7 @@ const Search = () => {
 
 export default Search;
 // export async function loader({ request }) {
-//   const userId = getAuthUserId() ? getAuthUserId()._id : "";
+//   const userId = getAuthUser() ? getAuthUser()._id : "";
 //   const searchParams = new URL(request.url).searchParams;
 //   const dataSearch = {
 //     city: searchParams.get("city"),
@@ -56,7 +56,7 @@ export async function loader({ request }) {
     maxPeople: searchParams.get("maxPeople"),
     room: searchParams.get("room"),
   };
-  const userId = getAuthUserId() ? getAuthUserId()._id : "";
+  const userId = getAuthUser() ? getAuthUser()._id : "";
   console.log(userId);
   const response = await fetch(
     `http://localhost:5000/hotels/search?city=${dataSearch.city}&dateStart=${dataSearch.dateStart}&dateEnd=${dataSearch.dateEnd}&room=${dataSearch.room}&maxPeople=${dataSearch.maxPeople}`,

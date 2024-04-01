@@ -1,6 +1,6 @@
 import Transaction from "../../component/transaction/Transaction";
 import { json, redirect } from "react-router";
-import { getAuthUserId } from "../../util/token";
+import { getAuthUser } from "../../util/token";
 
 const TransactionPage = () => {
   return <Transaction />;
@@ -8,7 +8,7 @@ const TransactionPage = () => {
 export default TransactionPage;
 
 export async function loader() {
-  const userId = getAuthUserId() ? getAuthUserId()._id : "";
+  const userId = getAuthUser() ? getAuthUser()._id : "";
   console.log(userId);
   const response = await fetch("http://localhost:8080/transactions/list", {
     method: "GET",

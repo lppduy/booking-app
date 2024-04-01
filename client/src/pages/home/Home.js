@@ -1,7 +1,7 @@
 import HomePage from "../../component/home/homePage/HomePage";
 import Header from "../../component/home/header/Header";
 import { json, redirect } from "react-router";
-import { getAuthUserId } from "../../util/token";
+import { getAuthUser } from "../../util/token";
 
 const Home = () => {
   return (
@@ -15,8 +15,8 @@ const Home = () => {
 export default Home;
 
 export async function loader() {
-  const userId = getAuthUserId() ? getAuthUserId()._id : "";
-  console.log(userId);
+  const userId = getAuthUser() ? getAuthUser()._id : "";
+  console.log('userId', userId);
   const response = await fetch("http://localhost:8080/hotels/listHotel", {
     method: "GET",
     headers: {
@@ -25,7 +25,6 @@ export async function loader() {
     },
     body: null,
   });
-
 
 
   if (response.status === 401) {
@@ -39,33 +38,3 @@ export async function loader() {
   const data = await response.json();
   return data;
 }
-
-// action Form search
-// export async function action({ request }) {
-//   const data = await request.formData();
-//   const dataSearch = {
-//     city: data.get("city"),
-//     dateStart: data.get("dateStart"),
-//     dateEnd: data.get("dateEnd"),
-//     maxPeople: data.get("maxPeople"),
-//   };
-//   // const userId = getAuthUserId() ? getAuthUserId()._id : "";
-
-//   // const response = await fetch("http://localhost:5000/hotel/search", {
-//   //   method: "POST",
-//   //   headers: {
-//   //     "Content-Type": "application/json",
-//   //     Authorization: userId,
-//   //   },
-//   //   body: JSON.stringify(dataSearch),
-//   // });
-//   // if (!response.ok) {
-//   //   throw json({ message: "Error creating" }, { status: 404 });
-//   // }
-//   // const result = await response.json();
-//   console.log(dataSearch);
-
-//   // return redirect(
-//   //   `/search?city=${dataSearch.city}&date=${dataSearch.dateStart}&dateEnd=${dataSearch.dateEnd}&maxPeople=${dataSearch.maxPeople}`
-//   // );
-// }
